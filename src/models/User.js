@@ -1,36 +1,53 @@
 const { DataTypes } = require('sequelize');
 
 const sequelize = require('../config/database');
+const { underscoredIf } = require('sequelize/lib/utils');
 
 const User = sequelize.define('User', {
 
+id: {
+
+    type: DataTypes.INTEGER,
+
+    primaryKey: true,
+
+    autoIncrement: true,
+
+    allowNull: false
+},
+
 username: {
 
-type: DataTypes.STRING,
+    type: DataTypes.STRING,
 
-allowNull: false,
+    allowNull: false,
 
-unique: true
+    unique: true
 
 },
 
 password: {
 
-type: DataTypes.STRING,
+    type: DataTypes.STRING,
 
-allowNull: false
+    allowNull: false
 
 },
 
 email: {
 
-type: DataTypes.STRING,
+    type: DataTypes.STRING,
 
-allowNull: false,
+    allowNull: false,
 
-unique: true
+    unique: true
 
 }
+
+}, {
+    timestamps: true,
+    underscored: true,
+    tableName: 'users',
 
 });
 

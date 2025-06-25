@@ -1,24 +1,28 @@
-const express = require('express');
+const app = require('./app');
 const sequelize = require('./config/database');
-const userRoutes = require('./routes/userRoutes');
-require('dotenv').config();
 
-const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
-app.use('/users', userRoutes);
+// Inicia o servidor e conecta ao banco de dados
+async function startServer() {
+    try {
+        // Conecta ao banco de dados
+        await sequelize.authenticate();
+        console.log('Banco de dados conectado com sucesso.');
 
-app.get('/', (req, res) => {
-    res.send('Server está funcionando!!');
-});
+        // Sincroniza os modelos com o banco de dados
+        await sequelize.sync();
+        console.log('Tabelas sincronizadas com sucesso.');
 
-sequelize.sync().then(() => {
-    app.listen(PORT, () => {
-        console.log(`Server is running on http://localhost:${PORT}`);
-        
+        // Inicia o servidor
+        app.listen(PORT, () => {
+            console.log(`Servidor rodando na porta ${PORT}`);
+        });
+    } 
+    // Mostra erro de conexão com o banco de dados
+    catch (error) {
+        console.error('Erro ao conectar ao banco de dados:', error);
+    }
+}
 
-    });
-}).catch((error) => {
-    console.error('Unable to connect to the database:', error);
-});
+startServer();

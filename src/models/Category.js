@@ -1,22 +1,22 @@
-const { DataType } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const Category = sequelize.define('Category', {
   id: {
-    type: DataType.INTEGER,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
   name: {
-    type: DataType.STRING,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   slug: {
-    type: DataType.STRING,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   use_in_menu: {
-    type: DataType.BOOLEAN,
+    type: DataTypes.BOOLEAN,
     defaultValue: true,
   }
 }, {

@@ -1,17 +1,17 @@
 const express = require('express');
-
-const authController = require('../controllers/authController');
+const UserController = require('../controllers/UserController');
+const authMiddleware = require('../middlewares/auth');
+const { User } = require('../models');
 
 const router = express.Router();
 
-router.post('/register', authController.register);
+// Rotas de acesso ao usuário
+router.post('/token', UserController.generateToken);
+router.post('/', UserController.store);
+router.get('/:id', UserController.show);
 
-router.post('/login', authController.login);
-
-router.get('/me', authController.verifyToken, (req, res) => {
-
-res.json({ message: 'Authenticated', userId: req.userId });
-
-});
+//Rotas protegidas por autenticação
+router.put('/:id', authMiddleware, UserController.update);
+router.delete('/:id', authMiddleware, UserController.delete);
 
 module.exports = router;

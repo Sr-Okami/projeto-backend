@@ -5,7 +5,7 @@ const authMiddleware = require('../middleware/auth');
 const router = express.Router();
 
 // Rotas de acesso às categorias
-router.get('/', CategoryController.index);
+router.get('/search', CategoryController.index);
 router.get('/:id', CategoryController.show);
 
 // Rotas protegidas por autenticação

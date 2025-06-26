@@ -42,7 +42,7 @@ const user = await User.findOne({ where: { username } });
 
 if (!user || !await bcrypt.compare(password, user.password)) {
 
-return res.status(401).json({ error: 'Invalid credentials' });
+return res.status(401).json({ error: 'Credenciais inválidas' });
 
 }
 
@@ -62,7 +62,7 @@ const token = req.headers['authorization'];
 
 if (!token) {
 
-return res.status(403).json({ error: 'No token provided' });
+return res.status(403).json({ error: 'token nao fornecido' });
 
 }
 
@@ -70,7 +70,7 @@ jwt.verify(token, process.env.APP_KEY, (err, decoded) => {
 
 if (err) {
 
-return res.status(401).json({ error: 'Failed to authenticate token' });
+return res.status(401).json({ error: 'falha na autenticação do token' });
 
 }
 

@@ -16,7 +16,7 @@ async function startServer() {
 
         // Inicia o servidor
         app.listen(PORT, () => {
-            console.log(`Servidor rodando na porta ${PORT}`);
+            console.log(`Servidor rodando na porta http://localhost:${PORT}`);
         });
     } 
     // Mostra erro de conexão com o banco de dados
